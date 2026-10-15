@@ -1,0 +1,31 @@
+{
+  "updated": "2026-10-15",
+  "release": "2027",
+  "starters": [
+    { "name": "Browt", "type": "grass" },
+    { "name": "Pombon", "type": "fire" },
+    { "name": "Gecqua", "type": "water" }
+  ],
+  "facts": [
+    {
+      "text": "The three first partner Pokémon are Browt, the Bean Chick Pokémon (Grass type); Pombon, the Puppy Pokémon (Fire type); and Gecqua, the Water Gecko Pokémon (Water type).",
+      "source": "https://windswaves.pokemon.com/en-us/",
+      "date": "2026-10-15"
+    },
+    {
+      "text": "Their abilities are Overgrow (Browt), Blaze (Pombon) and Torrent (Gecqua).",
+      "source": "https://windswaves.pokemon.com/en-us/",
+      "date": "2026-10-15"
+    },
+    {
+      "text": "Pokémon Winds and Pokémon Waves will be released exclusively on Nintendo Switch 2 in a simultaneous worldwide release in 2027.",
+      "source": "https://windswaves.pokemon.com/en-us/",
+      "date": "2026-10-15"
+    },
+    {
+      "text": "The games feature an open world with windswept islands and a vast ocean to explore.",
+      "source": "https://windswaves.pokemon.com/en-us/",
+      "date": "2026-10-15"
+    }
+  ]
+}
