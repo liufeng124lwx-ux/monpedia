@@ -3,6 +3,7 @@ import path from "node:path";
 import type { AbilityModifier, Pokemon } from "../src/lib/model";
 import { CSV_BASE, POKEAPI_REF, SPRITE_BASE, SPRITES_REF } from "./config";
 import { parseCsv, type Row } from "./lib/csv";
+import { regionalizeEvolution } from "./lib/evolution";
 import { buildAbilityNames, buildNatures, buildPokemon, buildTypeData } from "./lib/transform";
 import { mergeOverrides, validateDataset } from "./lib/validate";
 
@@ -50,7 +51,7 @@ async function main() {
     typeIdToName,
     SPRITE_BASE,
   );
-  const pokemon = mergeOverrides(generated, readJson<Pokemon[]>("overrides.json"));
+  const pokemon = mergeOverrides(regionalizeEvolution(generated), readJson<Pokemon[]>("overrides.json"));
   const abilityModifiers = readJson<AbilityModifier[]>("abilities.json");
 
   const errors = validateDataset({ types, pokemon, natures, abilityNames, abilityModifiers });

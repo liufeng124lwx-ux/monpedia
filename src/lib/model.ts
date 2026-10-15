@@ -34,6 +34,8 @@ export type AbilityModifier = {
   name: string;
   multipliers?: Partial<Record<TypeName, number>>;
   wonderGuard?: true;
+  /** Apply `multipliers` only where the move is already super effective (Delta Stream). */
+  superEffectiveOnly?: true;
   note?: string;
 };
 

@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import modifiersJson from "../../data/abilities.json";
-import { abilityChanges, applyAbility, defensiveMatchups } from "@/lib/matchups";
+import { abilityChanges, applyAbility, defensiveMatchups, guaranteedProfile } from "@/lib/matchups";
 import type { AbilityModifier } from "@/lib/model";
 import { defenseProfile } from "@/lib/typechart";
 
@@ -56,5 +56,33 @@ describe("non-standard multipliers", () => {
 
   it("ignores abilities that do not touch type matchups", () => {
     expect(abilityChanges({ types: ["fire"], abilities: ["blaze"] }, modifiers)).toEqual([]);
+  });
+});
+
+describe("guaranteedProfile (abilities every form of the Pokémon has)", () => {
+  it("applies an ability when it is the only one (Eelektross: Levitate)", () => {
+    expect(guaranteedProfile({ types: ["electric"], abilities: ["levitate"] }, modifiers).ground).toBe(0);
+  });
+
+  it("does not apply optional abilities (Bronzong: Levitate / Heatproof / Heavy Metal)", () => {
+    const p = guaranteedProfile({ types: ["steel", "psychic"], abilities: ["levitate", "heatproof", "heavy-metal"] }, modifiers);
+    expect(p.ground).toBe(2);
+    expect(p.fire).toBe(2);
+  });
+
+  it("covers weather abilities of Primal and Mega forms", () => {
+    expect(guaranteedProfile({ types: ["ground", "fire"], abilities: ["desolate-land"] }, modifiers).water).toBe(0);
+    expect(guaranteedProfile({ types: ["water"], abilities: ["primordial-sea"] }, modifiers).fire).toBe(0);
+    const ray = guaranteedProfile({ types: ["dragon", "flying"], abilities: ["delta-stream"] }, modifiers);
+    expect(ray.ice).toBe(2);
+    expect(ray.rock).toBe(1);
+    expect(ray.electric).toBe(1);
+  });
+
+  it("marks ability changes that always apply", () => {
+    const [change] = abilityChanges({ types: ["electric"], abilities: ["levitate"] }, modifiers);
+    expect(change.always).toBe(true);
+    const bronzong = abilityChanges({ types: ["steel", "psychic"], abilities: ["levitate", "heatproof"] }, modifiers);
+    expect(bronzong.every((c) => c.always === false)).toBe(true);
   });
 });

@@ -7,7 +7,7 @@ import { Faq } from "@/components/Faq";
 import { Sprite } from "@/components/Sprite";
 import { StatBars } from "@/components/StatBars";
 import { TypeBadge } from "@/components/TypeBadge";
-import { offenseVs, recommendCounters } from "@/lib/counters";
+import { offenseVsProfile, recommendCounters } from "@/lib/counters";
 import {
   getAbilityModifiers,
   getAbilityName,
@@ -17,10 +17,10 @@ import {
   hasEvolution,
   sameTypeCombo,
 } from "@/lib/data";
-import { abilityChanges, defensiveMatchups } from "@/lib/matchups";
+import { abilityChanges, guaranteedProfile } from "@/lib/matchups";
 import { pokemonDescription, pokemonFaq } from "@/lib/pokemon-page";
 import { pageMetadata } from "@/lib/seo";
-import { formatMultiplier, typeLabel } from "@/lib/typechart";
+import { formatMultiplier, groupByMultiplier, typeLabel } from "@/lib/typechart";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -48,9 +48,11 @@ export default async function PokemonPage({ params }: Props) {
   const p = getPokemon(slug);
   if (!p) notFound();
 
-  const groups = defensiveMatchups(p);
-  const changes = abilityChanges(p, getAbilityModifiers());
-  const counters = recommendCounters(p, getAllPokemon());
+  const modifiers = getAbilityModifiers();
+  const profile = guaranteedProfile(p, modifiers);
+  const groups = groupByMultiplier(profile);
+  const changes = abilityChanges(p, modifiers);
+  const counters = recommendCounters(p, getAllPokemon(), 6, modifiers);
   const stages = getEvolutionStages(p);
   const same = sameTypeCombo(p).slice(0, 12);
 
@@ -88,9 +90,9 @@ export default async function PokemonPage({ params }: Props) {
         </table>
         {changes.length > 0 && (
           <ul className="mt-3 space-y-1 text-sm">
-            {changes.map(({ ability, changes: c }) => (
+            {changes.map(({ ability, changes: c, always }) => (
               <li key={ability.slug}>
-                <strong>With {getAbilityName(ability.slug)}:</strong>{" "}
+                <strong>{always ? `${getAbilityName(ability.slug)} (always, already counted above):` : `With ${getAbilityName(ability.slug)}:`}</strong>{" "}
                 {c.map((x) => `${typeLabel(x.type)} ${formatMultiplier(x.from)} → ${formatMultiplier(x.to)}`).join(", ")}
                 {ability.note ? ` (${ability.note})` : ""}
               </li>
@@ -117,7 +119,7 @@ export default async function PokemonPage({ params }: Props) {
                   {stage.map((e) => (
                     <Link key={e.slug} href={`/pokemon/${e.slug}`} className="flex items-center gap-1 hover:underline">
                       <Sprite src={e.sprite} name={e.name} type={e.types[0]} size={48} />
-                      <span className={e.slug === p.speciesSlug ? "font-semibold" : ""}>{e.name}</span>
+                      <span className={e.slug === p.slug || e.slug === p.speciesSlug ? "font-semibold" : ""}>{e.name}</span>
                     </Link>
                   ))}
                 </div>
@@ -137,7 +139,7 @@ export default async function PokemonPage({ params }: Props) {
                   <Sprite src={c.sprite} name={c.name} type={c.types[0]} size={56} />
                   <span>
                     <span className="block font-medium">{c.name}</span>
-                    <span className="text-xs text-zinc-500">Hits for {formatMultiplier(offenseVs(c, p))}</span>
+                    <span className="text-xs text-zinc-500">Hits for {formatMultiplier(offenseVsProfile(c, profile))}</span>
                   </span>
                 </Link>
               </li>

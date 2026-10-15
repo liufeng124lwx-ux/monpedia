@@ -90,7 +90,7 @@ type AbilityModifier = {
 
 **出页规则**：一个形态只有在 `types` 或 `abilities` 与基础形态不同时才作为独立条目（独立页面）；纯外观变体合并入基础形态。规则写在 `build-data`，输出确定。
 
-**特性**：只收录影响属性克制的十几个特性（Levitate、Flash Fire、Water Absorb、Volt Absorb、Lightning Rod、Storm Drain、Motor Drive、Sap Sipper、Dry Skin、Thick Fat、Heatproof、Fluffy、Purifying Salt、Earth Eater、Well-Baked Body、Wonder Guard 等），手写在 `abilities.json`，不解析描述文字。弱点页按「默认（不计特性）」显示主表，另起一行列出某特性会改变的倍率；特性修正后的非常规倍率（1.25×、⅛× 等）按原值显示。
+**特性**：只收录影响属性克制的十几个特性（Levitate、Flash Fire、Water Absorb、Volt Absorb、Lightning Rod、Storm Drain、Motor Drive、Sap Sipper、Dry Skin、Thick Fat、Heatproof、Fluffy、Purifying Salt、Earth Eater、Well-Baked Body、Wonder Guard、Desolate Land、Primordial Sea、Delta Stream 等），手写在 `abilities.json`，不解析描述文字。弱点页主表、描述、FAQ 与推荐对策计入该宝可梦**必定拥有**的特性效果（它所有可选特性对某属性的结果都相同时才计入，如 Eelektross 只有 Levitate）；可选特性另起一行列出会改变的倍率；特性修正后的非常规倍率（1.25×、⅛× 等）按原值显示。
 
 ### 2.3 数据流
 

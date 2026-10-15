@@ -1,4 +1,5 @@
-import { defensiveMatchups } from "./matchups";
+import { getAbilityModifiers } from "./data";
+import { guaranteedMatchups } from "./matchups";
 import type { Pokemon } from "./model";
 import type { Qa } from "./seo";
 import { joinList } from "./text";
@@ -12,8 +13,9 @@ function labels(groups: MatchupGroup[], keep: (m: number) => boolean): string[] 
     .flatMap((g) => g.types.map((t) => (PLAIN.has(g.multiplier) ? typeLabel(t) : `${typeLabel(t)} (${formatMultiplier(g.multiplier)})`)));
 }
 
-export function weaknessSummary(p: Pick<Pokemon, "types">) {
-  const groups = defensiveMatchups(p);
+/** Matchups including abilities the Pokémon always has (spec §2.2). */
+export function weaknessSummary(p: Pick<Pokemon, "types" | "abilities">) {
+  const groups = guaranteedMatchups(p, getAbilityModifiers());
   return {
     weak: labels(groups, (m) => m > 1),
     resist: labels(groups, (m) => m > 0 && m < 1),
@@ -22,10 +24,13 @@ export function weaknessSummary(p: Pick<Pokemon, "types">) {
 }
 
 const typeString = (p: Pick<Pokemon, "types">) => p.types.map(typeLabel).join("/");
+const article = (word: string) => (/^[aeiou]/i.test(word) ? "an" : "a");
 
 export function pokemonDescription(p: Pokemon): string {
   const { weak, resist, immune } = weaknessSummary(p);
-  let s = `${p.name} is a ${typeString(p)}-type Pokémon. It is weak to ${weak.length ? joinList(weak) : "nothing"}`;
+  const types = typeString(p);
+  let s = `${p.name} is ${article(types)} ${types}-type Pokémon. `;
+  s += weak.length ? `It is weak to ${joinList(weak)}` : "It has no weaknesses";
   if (resist.length) s += `, resists ${joinList(resist)}`;
   if (immune.length) s += ` and is immune to ${joinList(immune)}`;
   return `${s}. See its best counters, base stats and evolutions.`;
@@ -33,11 +38,12 @@ export function pokemonDescription(p: Pokemon): string {
 
 export function pokemonFaq(p: Pokemon, counters: Pokemon[]): Qa[] {
   const { weak, resist, immune } = weaknessSummary(p);
+  const types = typeString(p);
   const faq: Qa[] = [
     {
       q: `What is ${p.name} weak to?`,
       a: weak.length
-        ? `As a ${typeString(p)} type, ${p.name} takes super-effective damage from ${joinList(weak)} moves.`
+        ? `As ${article(types)} ${types} type, ${p.name} takes super-effective damage from ${joinList(weak)} moves.`
         : `${p.name} has no type weaknesses.`,
     },
     {

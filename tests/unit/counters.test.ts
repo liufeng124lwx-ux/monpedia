@@ -46,3 +46,12 @@ describe("recommendCounters", () => {
     expect(recommendCounters(charizard, pool, 2)).toHaveLength(2);
   });
 });
+
+describe("recommendCounters with guaranteed abilities", () => {
+  it("never suggests attackers the target is always immune to (Eelektross: Levitate)", async () => {
+    const { default: modifiers } = await import("../../data/abilities.json");
+    const eelektross = mk("eelektross", ["electric"], 515, { abilities: ["levitate"] });
+    const result = recommendCounters(eelektross, [mk("golem", ["rock", "ground"], 495), mk("garchomp", ["dragon", "ground"], 600)], 6, modifiers as never);
+    expect(result).toEqual([]);
+  });
+});

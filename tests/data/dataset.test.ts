@@ -59,3 +59,16 @@ describe("generated dataset", () => {
     expect((natures as Nature[]).filter((n) => n.up === null)).toHaveLength(5);
   });
 });
+
+describe("regional evolutions", () => {
+  it("does not give Kanto Farfetch'd an evolution", () => {
+    expect(bySlug.get("farfetchd")!.evolution).toEqual([["farfetchd"]]);
+  });
+
+  it("gives regional forms their own lines", () => {
+    expect(bySlug.get("meowth-galar")!.evolution).toEqual([["meowth-galar"], ["perrserker"]]);
+    expect(bySlug.get("vulpix-alola")!.evolution).toEqual([["vulpix-alola"], ["ninetales-alola"]]);
+    expect(bySlug.get("wooper-paldea")!.evolution).toEqual([["wooper-paldea"], ["clodsire"]]);
+    expect(bySlug.get("wooper")!.evolution).toEqual([["wooper"], ["quagsire"]]);
+  });
+});

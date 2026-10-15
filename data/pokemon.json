@@ -909,10 +909,10 @@
     },
     "evolution": [
       [
-        "rattata"
+        "rattata-alola"
       ],
       [
-        "raticate"
+        "raticate-alola"
       ]
     ],
     "sprite": "https://cdn.jsdelivr.net/gh/PokeAPI/sprites@ba403973fdf9d0ac59175813861e6a1f8ed5020c/sprites/pokemon/10091.png"
@@ -976,10 +976,10 @@
     },
     "evolution": [
       [
-        "rattata"
+        "rattata-alola"
       ],
       [
-        "raticate"
+        "raticate-alola"
       ]
     ],
     "sprite": "https://cdn.jsdelivr.net/gh/PokeAPI/sprites@ba403973fdf9d0ac59175813861e6a1f8ed5020c/sprites/pokemon/10092.png"
@@ -1216,7 +1216,7 @@
         "pikachu"
       ],
       [
-        "raichu"
+        "raichu-alola"
       ]
     ],
     "sprite": "https://cdn.jsdelivr.net/gh/PokeAPI/sprites@ba403973fdf9d0ac59175813861e6a1f8ed5020c/sprites/pokemon/10100.png"
@@ -1346,10 +1346,10 @@
     },
     "evolution": [
       [
-        "sandshrew"
+        "sandshrew-alola"
       ],
       [
-        "sandslash"
+        "sandslash-alola"
       ]
     ],
     "sprite": "https://cdn.jsdelivr.net/gh/PokeAPI/sprites@ba403973fdf9d0ac59175813861e6a1f8ed5020c/sprites/pokemon/10101.png"
@@ -1411,10 +1411,10 @@
     },
     "evolution": [
       [
-        "sandshrew"
+        "sandshrew-alola"
       ],
       [
-        "sandslash"
+        "sandslash-alola"
       ]
     ],
     "sprite": "https://cdn.jsdelivr.net/gh/PokeAPI/sprites@ba403973fdf9d0ac59175813861e6a1f8ed5020c/sprites/pokemon/10102.png"
@@ -1800,10 +1800,10 @@
     },
     "evolution": [
       [
-        "vulpix"
+        "vulpix-alola"
       ],
       [
-        "ninetales"
+        "ninetales-alola"
       ]
     ],
     "sprite": "https://cdn.jsdelivr.net/gh/PokeAPI/sprites@ba403973fdf9d0ac59175813861e6a1f8ed5020c/sprites/pokemon/10103.png"
@@ -1865,10 +1865,10 @@
     },
     "evolution": [
       [
-        "vulpix"
+        "vulpix-alola"
       ],
       [
-        "ninetales"
+        "ninetales-alola"
       ]
     ],
     "sprite": "https://cdn.jsdelivr.net/gh/PokeAPI/sprites@ba403973fdf9d0ac59175813861e6a1f8ed5020c/sprites/pokemon/10104.png"
@@ -2325,10 +2325,10 @@
     },
     "evolution": [
       [
-        "diglett"
+        "diglett-alola"
       ],
       [
-        "dugtrio"
+        "dugtrio-alola"
       ]
     ],
     "sprite": "https://cdn.jsdelivr.net/gh/PokeAPI/sprites@ba403973fdf9d0ac59175813861e6a1f8ed5020c/sprites/pokemon/10105.png"
@@ -2392,10 +2392,10 @@
     },
     "evolution": [
       [
-        "diglett"
+        "diglett-alola"
       ],
       [
-        "dugtrio"
+        "dugtrio-alola"
       ]
     ],
     "sprite": "https://cdn.jsdelivr.net/gh/PokeAPI/sprites@ba403973fdf9d0ac59175813861e6a1f8ed5020c/sprites/pokemon/10106.png"
@@ -2428,8 +2428,7 @@
         "meowth"
       ],
       [
-        "persian",
-        "perrserker"
+        "persian"
       ]
     ],
     "sprite": "https://cdn.jsdelivr.net/gh/PokeAPI/sprites@ba403973fdf9d0ac59175813861e6a1f8ed5020c/sprites/pokemon/52.png"
@@ -2459,11 +2458,10 @@
     },
     "evolution": [
       [
-        "meowth"
+        "meowth-alola"
       ],
       [
-        "persian",
-        "perrserker"
+        "persian-alola"
       ]
     ],
     "sprite": "https://cdn.jsdelivr.net/gh/PokeAPI/sprites@ba403973fdf9d0ac59175813861e6a1f8ed5020c/sprites/pokemon/10107.png"
@@ -2493,10 +2491,9 @@
     },
     "evolution": [
       [
-        "meowth"
+        "meowth-galar"
       ],
       [
-        "persian",
         "perrserker"
       ]
     ],
@@ -2530,8 +2527,7 @@
         "meowth"
       ],
       [
-        "persian",
-        "perrserker"
+        "persian"
       ]
     ],
     "sprite": "https://cdn.jsdelivr.net/gh/PokeAPI/sprites@ba403973fdf9d0ac59175813861e6a1f8ed5020c/sprites/pokemon/53.png"
@@ -2561,11 +2557,10 @@
     },
     "evolution": [
       [
-        "meowth"
+        "meowth-alola"
       ],
       [
-        "persian",
-        "perrserker"
+        "persian-alola"
       ]
     ],
     "sprite": "https://cdn.jsdelivr.net/gh/PokeAPI/sprites@ba403973fdf9d0ac59175813861e6a1f8ed5020c/sprites/pokemon/10108.png"
@@ -2767,10 +2762,10 @@
     },
     "evolution": [
       [
-        "growlithe"
+        "growlithe-hisui"
       ],
       [
-        "arcanine"
+        "arcanine-hisui"
       ]
     ],
     "sprite": "https://cdn.jsdelivr.net/gh/PokeAPI/sprites@ba403973fdf9d0ac59175813861e6a1f8ed5020c/sprites/pokemon/10229.png"
@@ -2834,10 +2829,10 @@
     },
     "evolution": [
       [
-        "growlithe"
+        "growlithe-hisui"
       ],
       [
-        "arcanine"
+        "arcanine-hisui"
       ]
     ],
     "sprite": "https://cdn.jsdelivr.net/gh/PokeAPI/sprites@ba403973fdf9d0ac59175813861e6a1f8ed5020c/sprites/pokemon/10230.png"
@@ -3478,13 +3473,13 @@
     },
     "evolution": [
       [
-        "geodude"
+        "geodude-alola"
       ],
       [
-        "graveler"
+        "graveler-alola"
       ],
       [
-        "golem"
+        "golem-alola"
       ]
     ],
     "sprite": "https://cdn.jsdelivr.net/gh/PokeAPI/sprites@ba403973fdf9d0ac59175813861e6a1f8ed5020c/sprites/pokemon/10109.png"
@@ -3552,13 +3547,13 @@
     },
     "evolution": [
       [
-        "geodude"
+        "geodude-alola"
       ],
       [
-        "graveler"
+        "graveler-alola"
       ],
       [
-        "golem"
+        "golem-alola"
       ]
     ],
     "sprite": "https://cdn.jsdelivr.net/gh/PokeAPI/sprites@ba403973fdf9d0ac59175813861e6a1f8ed5020c/sprites/pokemon/10110.png"
@@ -3626,13 +3621,13 @@
     },
     "evolution": [
       [
-        "geodude"
+        "geodude-alola"
       ],
       [
-        "graveler"
+        "graveler-alola"
       ],
       [
-        "golem"
+        "golem-alola"
       ]
     ],
     "sprite": "https://cdn.jsdelivr.net/gh/PokeAPI/sprites@ba403973fdf9d0ac59175813861e6a1f8ed5020c/sprites/pokemon/10111.png"
@@ -3695,10 +3690,10 @@
     },
     "evolution": [
       [
-        "ponyta"
+        "ponyta-galar"
       ],
       [
-        "rapidash"
+        "rapidash-galar"
       ]
     ],
     "sprite": "https://cdn.jsdelivr.net/gh/PokeAPI/sprites@ba403973fdf9d0ac59175813861e6a1f8ed5020c/sprites/pokemon/10162.png"
@@ -3762,10 +3757,10 @@
     },
     "evolution": [
       [
-        "ponyta"
+        "ponyta-galar"
       ],
       [
-        "rapidash"
+        "rapidash-galar"
       ]
     ],
     "sprite": "https://cdn.jsdelivr.net/gh/PokeAPI/sprites@ba403973fdf9d0ac59175813861e6a1f8ed5020c/sprites/pokemon/10163.png"
@@ -3830,11 +3825,11 @@
     },
     "evolution": [
       [
-        "slowpoke"
+        "slowpoke-galar"
       ],
       [
-        "slowbro",
-        "slowking"
+        "slowbro-galar",
+        "slowking-galar"
       ]
     ],
     "sprite": "https://cdn.jsdelivr.net/gh/PokeAPI/sprites@ba403973fdf9d0ac59175813861e6a1f8ed5020c/sprites/pokemon/10164.png"
@@ -3933,11 +3928,11 @@
     },
     "evolution": [
       [
-        "slowpoke"
+        "slowpoke-galar"
       ],
       [
-        "slowbro",
-        "slowking"
+        "slowbro-galar",
+        "slowking-galar"
       ]
     ],
     "sprite": "https://cdn.jsdelivr.net/gh/PokeAPI/sprites@ba403973fdf9d0ac59175813861e6a1f8ed5020c/sprites/pokemon/10165.png"
@@ -4043,9 +4038,6 @@
     "evolution": [
       [
         "farfetchd"
-      ],
-      [
-        "sirfetchd"
       ]
     ],
     "sprite": "https://cdn.jsdelivr.net/gh/PokeAPI/sprites@ba403973fdf9d0ac59175813861e6a1f8ed5020c/sprites/pokemon/83.png"
@@ -4074,7 +4066,7 @@
     },
     "evolution": [
       [
-        "farfetchd"
+        "farfetchd-galar"
       ],
       [
         "sirfetchd"
@@ -4276,10 +4268,10 @@
     },
     "evolution": [
       [
-        "grimer"
+        "grimer-alola"
       ],
       [
-        "muk"
+        "muk-alola"
       ]
     ],
     "sprite": "https://cdn.jsdelivr.net/gh/PokeAPI/sprites@ba403973fdf9d0ac59175813861e6a1f8ed5020c/sprites/pokemon/10112.png"
@@ -4343,10 +4335,10 @@
     },
     "evolution": [
       [
-        "grimer"
+        "grimer-alola"
       ],
       [
-        "muk"
+        "muk-alola"
       ]
     ],
     "sprite": "https://cdn.jsdelivr.net/gh/PokeAPI/sprites@ba403973fdf9d0ac59175813861e6a1f8ed5020c/sprites/pokemon/10113.png"
@@ -4783,10 +4775,10 @@
     },
     "evolution": [
       [
-        "voltorb"
+        "voltorb-hisui"
       ],
       [
-        "electrode"
+        "electrode-hisui"
       ]
     ],
     "sprite": "https://cdn.jsdelivr.net/gh/PokeAPI/sprites@ba403973fdf9d0ac59175813861e6a1f8ed5020c/sprites/pokemon/10231.png"
@@ -4850,10 +4842,10 @@
     },
     "evolution": [
       [
-        "voltorb"
+        "voltorb-hisui"
       ],
       [
-        "electrode"
+        "electrode-hisui"
       ]
     ],
     "sprite": "https://cdn.jsdelivr.net/gh/PokeAPI/sprites@ba403973fdf9d0ac59175813861e6a1f8ed5020c/sprites/pokemon/10232.png"
@@ -4952,7 +4944,7 @@
         "exeggcute"
       ],
       [
-        "exeggutor"
+        "exeggutor-alola"
       ]
     ],
     "sprite": "https://cdn.jsdelivr.net/gh/PokeAPI/sprites@ba403973fdf9d0ac59175813861e6a1f8ed5020c/sprites/pokemon/10114.png"
@@ -5052,7 +5044,7 @@
         "cubone"
       ],
       [
-        "marowak"
+        "marowak-alola"
       ]
     ],
     "sprite": "https://cdn.jsdelivr.net/gh/PokeAPI/sprites@ba403973fdf9d0ac59175813861e6a1f8ed5020c/sprites/pokemon/10115.png"
@@ -5255,7 +5247,7 @@
         "koffing"
       ],
       [
-        "weezing"
+        "weezing-galar"
       ]
     ],
     "sprite": "https://cdn.jsdelivr.net/gh/PokeAPI/sprites@ba403973fdf9d0ac59175813861e6a1f8ed5020c/sprites/pokemon/10167.png"
@@ -5728,9 +5720,6 @@
       ],
       [
         "mr-mime"
-      ],
-      [
-        "mr-rime"
       ]
     ],
     "sprite": "https://cdn.jsdelivr.net/gh/PokeAPI/sprites@ba403973fdf9d0ac59175813861e6a1f8ed5020c/sprites/pokemon/122.png"
@@ -5764,7 +5753,7 @@
         "mime-jr"
       ],
       [
-        "mr-mime"
+        "mr-mime-galar"
       ],
       [
         "mr-rime"
@@ -6025,7 +6014,7 @@
     },
     "evolution": [
       [
-        "tauros"
+        "tauros-paldea-combat-breed"
       ]
     ],
     "sprite": "https://cdn.jsdelivr.net/gh/PokeAPI/sprites@ba403973fdf9d0ac59175813861e6a1f8ed5020c/sprites/pokemon/10250.png"
@@ -6056,7 +6045,7 @@
     },
     "evolution": [
       [
-        "tauros"
+        "tauros-paldea-combat-breed"
       ]
     ],
     "sprite": "https://cdn.jsdelivr.net/gh/PokeAPI/sprites@ba403973fdf9d0ac59175813861e6a1f8ed5020c/sprites/pokemon/10251.png"
@@ -6087,7 +6076,7 @@
     },
     "evolution": [
       [
-        "tauros"
+        "tauros-paldea-combat-breed"
       ]
     ],
     "sprite": "https://cdn.jsdelivr.net/gh/PokeAPI/sprites@ba403973fdf9d0ac59175813861e6a1f8ed5020c/sprites/pokemon/10252.png"
@@ -6725,7 +6714,7 @@
     },
     "evolution": [
       [
-        "articuno"
+        "articuno-galar"
       ]
     ],
     "sprite": "https://cdn.jsdelivr.net/gh/PokeAPI/sprites@ba403973fdf9d0ac59175813861e6a1f8ed5020c/sprites/pokemon/10169.png"
@@ -6784,7 +6773,7 @@
     },
     "evolution": [
       [
-        "zapdos"
+        "zapdos-galar"
       ]
     ],
     "sprite": "https://cdn.jsdelivr.net/gh/PokeAPI/sprites@ba403973fdf9d0ac59175813861e6a1f8ed5020c/sprites/pokemon/10170.png"
@@ -6843,7 +6832,7 @@
     },
     "evolution": [
       [
-        "moltres"
+        "moltres-galar"
       ]
     ],
     "sprite": "https://cdn.jsdelivr.net/gh/PokeAPI/sprites@ba403973fdf9d0ac59175813861e6a1f8ed5020c/sprites/pokemon/10171.png"
@@ -7379,7 +7368,7 @@
         "quilava"
       ],
       [
-        "typhlosion"
+        "typhlosion-hisui"
       ]
     ],
     "sprite": "https://cdn.jsdelivr.net/gh/PokeAPI/sprites@ba403973fdf9d0ac59175813861e6a1f8ed5020c/sprites/pokemon/10233.png"
@@ -8740,8 +8729,7 @@
         "wooper"
       ],
       [
-        "quagsire",
-        "clodsire"
+        "quagsire"
       ]
     ],
     "sprite": "https://cdn.jsdelivr.net/gh/PokeAPI/sprites@ba403973fdf9d0ac59175813861e6a1f8ed5020c/sprites/pokemon/194.png"
@@ -8772,10 +8760,9 @@
     },
     "evolution": [
       [
-        "wooper"
+        "wooper-paldea"
       ],
       [
-        "quagsire",
         "clodsire"
       ]
     ],
@@ -8810,8 +8797,7 @@
         "wooper"
       ],
       [
-        "quagsire",
-        "clodsire"
+        "quagsire"
       ]
     ],
     "sprite": "https://cdn.jsdelivr.net/gh/PokeAPI/sprites@ba403973fdf9d0ac59175813861e6a1f8ed5020c/sprites/pokemon/195.png"
@@ -8989,11 +8975,11 @@
     },
     "evolution": [
       [
-        "slowpoke"
+        "slowpoke-galar"
       ],
       [
-        "slowbro",
-        "slowking"
+        "slowbro-galar",
+        "slowking-galar"
       ]
     ],
     "sprite": "https://cdn.jsdelivr.net/gh/PokeAPI/sprites@ba403973fdf9d0ac59175813861e6a1f8ed5020c/sprites/pokemon/10172.png"
@@ -9414,9 +9400,6 @@
     "evolution": [
       [
         "qwilfish"
-      ],
-      [
-        "overqwil"
       ]
     ],
     "sprite": "https://cdn.jsdelivr.net/gh/PokeAPI/sprites@ba403973fdf9d0ac59175813861e6a1f8ed5020c/sprites/pokemon/211.png"
@@ -9447,7 +9430,7 @@
     },
     "evolution": [
       [
-        "qwilfish"
+        "qwilfish-hisui"
       ],
       [
         "overqwil"
@@ -9643,8 +9626,7 @@
         "sneasel"
       ],
       [
-        "weavile",
-        "sneasler"
+        "weavile"
       ]
     ],
     "sprite": "https://cdn.jsdelivr.net/gh/PokeAPI/sprites@ba403973fdf9d0ac59175813861e6a1f8ed5020c/sprites/pokemon/215.png"
@@ -9675,10 +9657,9 @@
     },
     "evolution": [
       [
-        "sneasel"
+        "sneasel-hisui"
       ],
       [
-        "weavile",
         "sneasler"
       ]
     ],
@@ -9924,9 +9905,6 @@
     "evolution": [
       [
         "corsola"
-      ],
-      [
-        "cursola"
       ]
     ],
     "sprite": "https://cdn.jsdelivr.net/gh/PokeAPI/sprites@ba403973fdf9d0ac59175813861e6a1f8ed5020c/sprites/pokemon/222.png"
@@ -9955,7 +9933,7 @@
     },
     "evolution": [
       [
-        "corsola"
+        "corsola-galar"
       ],
       [
         "cursola"
@@ -11531,9 +11509,6 @@
       ],
       [
         "linoone"
-      ],
-      [
-        "obstagoon"
       ]
     ],
     "sprite": "https://cdn.jsdelivr.net/gh/PokeAPI/sprites@ba403973fdf9d0ac59175813861e6a1f8ed5020c/sprites/pokemon/263.png"
@@ -11564,10 +11539,10 @@
     },
     "evolution": [
       [
-        "zigzagoon"
+        "zigzagoon-galar"
       ],
       [
-        "linoone"
+        "linoone-galar"
       ],
       [
         "obstagoon"
@@ -11604,9 +11579,6 @@
       ],
       [
         "linoone"
-      ],
-      [
-        "obstagoon"
       ]
     ],
     "sprite": "https://cdn.jsdelivr.net/gh/PokeAPI/sprites@ba403973fdf9d0ac59175813861e6a1f8ed5020c/sprites/pokemon/264.png"
@@ -11637,10 +11609,10 @@
     },
     "evolution": [
       [
-        "zigzagoon"
+        "zigzagoon-galar"
       ],
       [
-        "linoone"
+        "linoone-galar"
       ],
       [
         "obstagoon"
@@ -18305,9 +18277,6 @@
       ],
       [
         "mr-mime"
-      ],
-      [
-        "mr-rime"
       ]
     ],
     "sprite": "https://cdn.jsdelivr.net/gh/PokeAPI/sprites@ba403973fdf9d0ac59175813861e6a1f8ed5020c/sprites/pokemon/439.png"
@@ -19204,8 +19173,7 @@
         "sneasel"
       ],
       [
-        "weavile",
-        "sneasler"
+        "weavile"
       ]
     ],
     "sprite": "https://cdn.jsdelivr.net/gh/PokeAPI/sprites@ba403973fdf9d0ac59175813861e6a1f8ed5020c/sprites/pokemon/461.png"
@@ -20932,7 +20900,7 @@
         "dewott"
       ],
       [
-        "samurott"
+        "samurott-hisui"
       ]
     ],
     "sprite": "https://cdn.jsdelivr.net/gh/PokeAPI/sprites@ba403973fdf9d0ac59175813861e6a1f8ed5020c/sprites/pokemon/10236.png"
@@ -22644,7 +22612,7 @@
         "petilil"
       ],
       [
-        "lilligant"
+        "lilligant-hisui"
       ]
     ],
     "sprite": "https://cdn.jsdelivr.net/gh/PokeAPI/sprites@ba403973fdf9d0ac59175813861e6a1f8ed5020c/sprites/pokemon/10237.png"
@@ -22915,10 +22883,10 @@
     },
     "evolution": [
       [
-        "darumaka"
+        "darumaka-galar"
       ],
       [
-        "darmanitan"
+        "darmanitan-galar-standard"
       ]
     ],
     "sprite": "https://cdn.jsdelivr.net/gh/PokeAPI/sprites@ba403973fdf9d0ac59175813861e6a1f8ed5020c/sprites/pokemon/10176.png"
@@ -23012,10 +22980,10 @@
     },
     "evolution": [
       [
-        "darumaka"
+        "darumaka-galar"
       ],
       [
-        "darmanitan"
+        "darmanitan-galar-standard"
       ]
     ],
     "sprite": "https://cdn.jsdelivr.net/gh/PokeAPI/sprites@ba403973fdf9d0ac59175813861e6a1f8ed5020c/sprites/pokemon/10177.png"
@@ -23045,10 +23013,10 @@
     },
     "evolution": [
       [
-        "darumaka"
+        "darumaka-galar"
       ],
       [
-        "darmanitan"
+        "darmanitan-galar-standard"
       ]
     ],
     "sprite": "https://cdn.jsdelivr.net/gh/PokeAPI/sprites@ba403973fdf9d0ac59175813861e6a1f8ed5020c/sprites/pokemon/10178.png"
@@ -23308,8 +23276,7 @@
         "yamask"
       ],
       [
-        "cofagrigus",
-        "runerigus"
+        "cofagrigus"
       ]
     ],
     "sprite": "https://cdn.jsdelivr.net/gh/PokeAPI/sprites@ba403973fdf9d0ac59175813861e6a1f8ed5020c/sprites/pokemon/562.png"
@@ -23338,10 +23305,9 @@
     },
     "evolution": [
       [
-        "yamask"
+        "yamask-galar"
       ],
       [
-        "cofagrigus",
         "runerigus"
       ]
     ],
@@ -23373,8 +23339,7 @@
         "yamask"
       ],
       [
-        "cofagrigus",
-        "runerigus"
+        "cofagrigus"
       ]
     ],
     "sprite": "https://cdn.jsdelivr.net/gh/PokeAPI/sprites@ba403973fdf9d0ac59175813861e6a1f8ed5020c/sprites/pokemon/563.png"
@@ -23632,10 +23597,10 @@
     },
     "evolution": [
       [
-        "zorua"
+        "zorua-hisui"
       ],
       [
-        "zoroark"
+        "zoroark-hisui"
       ]
     ],
     "sprite": "https://cdn.jsdelivr.net/gh/PokeAPI/sprites@ba403973fdf9d0ac59175813861e6a1f8ed5020c/sprites/pokemon/10238.png"
@@ -23695,10 +23660,10 @@
     },
     "evolution": [
       [
-        "zorua"
+        "zorua-hisui"
       ],
       [
-        "zoroark"
+        "zoroark-hisui"
       ]
     ],
     "sprite": "https://cdn.jsdelivr.net/gh/PokeAPI/sprites@ba403973fdf9d0ac59175813861e6a1f8ed5020c/sprites/pokemon/10239.png"
@@ -25402,7 +25367,7 @@
     },
     "evolution": [
       [
-        "stunfisk"
+        "stunfisk-galar"
       ]
     ],
     "sprite": "https://cdn.jsdelivr.net/gh/PokeAPI/sprites@ba403973fdf9d0ac59175813861e6a1f8ed5020c/sprites/pokemon/10180.png"
@@ -25804,7 +25769,7 @@
         "rufflet"
       ],
       [
-        "braviary"
+        "braviary-hisui"
       ]
     ],
     "sprite": "https://cdn.jsdelivr.net/gh/PokeAPI/sprites@ba403973fdf9d0ac59175813861e6a1f8ed5020c/sprites/pokemon/10240.png"
@@ -28957,10 +28922,10 @@
         "goomy"
       ],
       [
-        "sliggoo"
+        "sliggoo-hisui"
       ],
       [
-        "goodra"
+        "goodra-hisui"
       ]
     ],
     "sprite": "https://cdn.jsdelivr.net/gh/PokeAPI/sprites@ba403973fdf9d0ac59175813861e6a1f8ed5020c/sprites/pokemon/10241.png"
@@ -29030,10 +28995,10 @@
         "goomy"
       ],
       [
-        "sliggoo"
+        "sliggoo-hisui"
       ],
       [
-        "goodra"
+        "goodra-hisui"
       ]
     ],
     "sprite": "https://cdn.jsdelivr.net/gh/PokeAPI/sprites@ba403973fdf9d0ac59175813861e6a1f8ed5020c/sprites/pokemon/10242.png"
@@ -29299,7 +29264,7 @@
         "bergmite"
       ],
       [
-        "avalugg"
+        "avalugg-hisui"
       ]
     ],
     "sprite": "https://cdn.jsdelivr.net/gh/PokeAPI/sprites@ba403973fdf9d0ac59175813861e6a1f8ed5020c/sprites/pokemon/10243.png"
@@ -29771,7 +29736,7 @@
         "dartrix"
       ],
       [
-        "decidueye"
+        "decidueye-hisui"
       ]
     ],
     "sprite": "https://cdn.jsdelivr.net/gh/PokeAPI/sprites@ba403973fdf9d0ac59175813861e6a1f8ed5020c/sprites/pokemon/10244.png"
@@ -34739,10 +34704,10 @@
     },
     "evolution": [
       [
-        "zigzagoon"
+        "zigzagoon-galar"
       ],
       [
-        "linoone"
+        "linoone-galar"
       ],
       [
         "obstagoon"
@@ -34775,10 +34740,9 @@
     },
     "evolution": [
       [
-        "meowth"
+        "meowth-galar"
       ],
       [
-        "persian",
         "perrserker"
       ]
     ],
@@ -34808,7 +34772,7 @@
     },
     "evolution": [
       [
-        "corsola"
+        "corsola-galar"
       ],
       [
         "cursola"
@@ -34840,7 +34804,7 @@
     },
     "evolution": [
       [
-        "farfetchd"
+        "farfetchd-galar"
       ],
       [
         "sirfetchd"
@@ -34877,7 +34841,7 @@
         "mime-jr"
       ],
       [
-        "mr-mime"
+        "mr-mime-galar"
       ],
       [
         "mr-rime"
@@ -34909,10 +34873,9 @@
     },
     "evolution": [
       [
-        "yamask"
+        "yamask-galar"
       ],
       [
-        "cofagrigus",
         "runerigus"
       ]
     ],
@@ -36281,10 +36244,9 @@
     },
     "evolution": [
       [
-        "sneasel"
+        "sneasel-hisui"
       ],
       [
-        "weavile",
         "sneasler"
       ]
     ],
@@ -36316,7 +36278,7 @@
     },
     "evolution": [
       [
-        "qwilfish"
+        "qwilfish-hisui"
       ],
       [
         "overqwil"
@@ -39013,10 +38975,9 @@
     },
     "evolution": [
       [
-        "wooper"
+        "wooper-paldea"
       ],
       [
-        "quagsire",
         "clodsire"
       ]
     ],
