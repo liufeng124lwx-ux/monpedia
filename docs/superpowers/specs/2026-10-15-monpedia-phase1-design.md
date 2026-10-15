@@ -30,7 +30,8 @@
 - TypeScript、Tailwind CSS，不引组件库。
 - 静态导出下 `next/image` 设为 `unoptimized`；`trailingSlash: false`，canonical 与 sitemap 一律用不带结尾斜杠的 URL。
 - 数据来源：PokeAPI 仓库的原始 CSV（`data/v2/csv`），由脚本一次性转换为精简 JSON 并提交到仓库；构建时只读本地 JSON。
-- PokeAPI 跟不上的内容（如 Legends Z-A / Champions 新增 Mega、Winds & Waves 初始精灵）由手写的 `data/overrides.json` 补充或覆盖。
+- PokeAPI 跟不上的宝可梦条目（如 Legends Z-A / Champions 新增 Mega）由手写的 `data/overrides.json` 补充或覆盖，须有完整且可核实的属性、特性、种族值。
+- Winds & Waves 初始精灵尚无官方种族值，不进 `pokemon.json`；其名称、属性与官方信息写在手写的 `data/winds-waves.json`。
 
 ### 2.1 目录结构
 
@@ -42,6 +43,9 @@ data/
   pokemon.json          # 物种 + 出页形态，约 1300 条
   natures.json          # 25 种性格
   abilities.json        # 手写：影响属性克制的特性表
+  ability-names.json    # 生成：全部特性 slug → 英文名
+  winds-waves.json      # 手写：W&W 初始精灵与官方已确认信息（带出处、日期）
+  meta.json             # 生成：PokeAPI / sprites 固定版本号、物种数、生成日期
 src/lib/
   data.ts               # 读 JSON 的唯一入口，导出带类型的访问函数
   typechart.ts          # effectiveness(attackType, defenderTypes) → 0|0.25|0.5|1|2|4（只看属性）
@@ -80,6 +84,7 @@ type AbilityModifier = {
   // 对特定攻击属性的倍率覆盖，如 levitate: { ground: 0 }
   multipliers?: Partial<Record<TypeName, number>>; // 与属性倍率相乘；Dry Skin 为 { water: 0, fire: 1.25 }
   wonderGuard?: true;        // 仅效果绝佳的攻击能命中
+  note?: string;             // 非属性类效果的补充说明，如 Fluffy 减半接触类招式伤害
 };
 ```
 
