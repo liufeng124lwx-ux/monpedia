@@ -24,3 +24,6 @@ export function filterPokemon<T extends PokemonSummary>(list: readonly T[], f: P
     (p) => (!f.type || p.types.includes(f.type)) && (!f.gen || p.generation === f.gen) && matchesQuery(p, f.q),
   );
 }
+
+/** Fired by the header search when the list page is already open. */
+export const SEARCH_EVENT = "monpedia:search";

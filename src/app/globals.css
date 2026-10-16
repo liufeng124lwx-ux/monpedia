@@ -1,1 +1,228 @@
 @import "tailwindcss";
+
+/* Tokens: see docs/research/2026-10-15-ui-redesign.md.
+   red = primary action + active state only; yellow = stage bands + info pills only. */
+:root {
+  --ink: #211f1a;
+  --paper: #ffffff;
+  --panel: #f1f0ec;
+  --line: #dedcd5;
+  --muted: #6b675c;
+  --yellow: #ffcb05;
+  --red: #e3350d;
+  --red-deep: #a82408;
+  --stage-ink: #211f1a;
+  --x4: #b3261e;
+  --x2: #e5534b;
+  --xhalf: #2f9e66;
+  --xquarter: #1d6b45;
+  --x0: #211f1a;
+  --duration-fast: 120ms;
+  --duration: 200ms;
+  --duration-slow: 320ms;
+  --ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --ease-emph: cubic-bezier(0.2, 0, 0, 1);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --ink: #f3f1ea;
+    --paper: #16150f;
+    --panel: #24221b;
+    --line: #3a372d;
+    --muted: #a7a293;
+    --x0: #4a463b;
+  }
+}
+
+@theme inline {
+  --font-sans: var(--font-outfit), ui-sans-serif, system-ui, sans-serif;
+  --color-ink: var(--ink);
+  --color-paper: var(--paper);
+  --color-panel: var(--panel);
+  --color-line: var(--line);
+  --color-muted: var(--muted);
+  --color-yellow: var(--yellow);
+  --color-red: var(--red);
+  --color-red-deep: var(--red-deep);
+  --color-stage-ink: var(--stage-ink);
+}
+
+html {
+  scroll-padding-top: 5rem;
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-feature-settings: "tnum" 0;
+}
+
+h1, h2, h3 {
+  text-wrap: balance;
+  letter-spacing: -0.02em;
+}
+
+:focus-visible {
+  outline: 3px solid var(--red);
+  outline-offset: 2px;
+}
+
+/* Pressable key (borrowed from Duolingo's buttons): a hard bottom edge that collapses on press. */
+.key {
+  --edge: color-mix(in srgb, var(--key-bg, var(--red)) 62%, black);
+  background: var(--key-bg, var(--red));
+  color: var(--key-fg, #fff);
+  border-radius: 6px;
+  box-shadow: 0 4px 0 var(--edge);
+  transform: translateY(0);
+  transition:
+    transform var(--duration-fast) var(--ease-out),
+    box-shadow var(--duration-fast) var(--ease-out),
+    filter var(--duration-fast) var(--ease-out);
+}
+.key:hover {
+  filter: brightness(1.06);
+}
+.key:active,
+.key[aria-pressed="true"] {
+  transform: translateY(4px);
+  box-shadow: 0 0 0 var(--edge);
+}
+.key[aria-pressed="true"] {
+  outline: 3px solid var(--ink);
+  outline-offset: 2px;
+}
+
+/* Result chips pop in one after another when the calculator changes. */
+@keyframes pop-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px) scale(0.92);
+  }
+}
+.pop {
+  animation: pop-in var(--duration) var(--ease-emph) both;
+  animation-delay: calc(var(--i, 0) * 28ms);
+}
+
+/* Stat bars grow from zero on first paint. */
+@keyframes grow {
+  from {
+    transform: scaleX(0);
+  }
+}
+.grow-in {
+  transform-origin: left;
+  animation: grow 700ms var(--ease-emph) both;
+  animation-delay: calc(var(--i, 0) * 60ms);
+}
+
+/* Holo foil over the artwork card, driven by --mx/--my from HoloCard. */
+.holo {
+  transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+  transition: transform var(--duration-slow) var(--ease-out);
+  transform-style: preserve-3d;
+}
+.holo[data-active="true"] {
+  transition-duration: 60ms;
+}
+.holo::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  mix-blend-mode: color-dodge;
+  background:
+    radial-gradient(circle at var(--mx, 50%) var(--my, 50%), rgb(255 255 255 / 0.55), transparent 45%),
+    linear-gradient(115deg, transparent 20%, #ff6ec4 36%, #7afcff 50%, #fff36b 64%, transparent 80%);
+  background-size: 100% 100%, 220% 220%;
+  background-position: center, var(--mx, 50%) var(--my, 50%);
+  transition: opacity var(--duration) var(--ease-out);
+}
+.holo[data-active="true"]::after {
+  opacity: 0.45;
+}
+
+/* Floating idle motion for the hero artwork. */
+@keyframes bob {
+  50% {
+    transform: translateY(-8px);
+  }
+}
+.bob {
+  animation: bob 4.5s ease-in-out infinite;
+}
+
+/* FAQ disclosure chevron. */
+details > summary {
+  list-style: none;
+}
+details > summary::-webkit-details-marker {
+  display: none;
+}
+details[open] > summary .chev {
+  transform: rotate(45deg);
+}
+
+/* Shared-element morph (list artwork -> detail hero). */
+::view-transition-group(.morph) {
+  animation-duration: 380ms;
+  animation-timing-function: cubic-bezier(0.2, 0, 0, 1);
+}
+::view-transition-image-pair(.morph) {
+  animation-name: via-blur;
+}
+@keyframes via-blur {
+  30% {
+    filter: blur(2px);
+  }
+}
+
+/* Directional slides for previous/next Pokémon. */
+@keyframes vt-fade {
+  from {
+    opacity: 0;
+  }
+}
+@keyframes vt-slide {
+  from {
+    transform: translateX(var(--slide-offset));
+  }
+}
+::view-transition-old(.nav-forward) {
+  --slide-offset: -48px;
+  animation: 140ms ease-in both vt-fade reverse, 320ms var(--ease-emph) both vt-slide reverse;
+}
+::view-transition-new(.nav-forward) {
+  --slide-offset: 48px;
+  animation: 200ms ease-out 120ms both vt-fade, 320ms var(--ease-emph) both vt-slide;
+}
+::view-transition-old(.nav-back) {
+  --slide-offset: 48px;
+  animation: 140ms ease-in both vt-fade reverse, 320ms var(--ease-emph) both vt-slide reverse;
+}
+::view-transition-new(.nav-back) {
+  --slide-offset: -48px;
+  animation: 200ms ease-out 120ms both vt-fade, 320ms var(--ease-emph) both vt-slide;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 1ms !important;
+  }
+  .holo {
+    transform: none !important;
+  }
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
+}

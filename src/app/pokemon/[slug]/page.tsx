@@ -1,12 +1,18 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { ViewTransition } from "react";
 import { AdSlot } from "@/components/AdSlot";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { Faq } from "@/components/Faq";
+import { HoloCard } from "@/components/HoloCard";
+import { MatchupRows, MultiplierChip } from "@/components/Matchups";
+import { H2, Wrap } from "@/components/Page";
+import { dexNo, PokemonCard } from "@/components/PokemonCard";
 import { Sprite } from "@/components/Sprite";
 import { StatBars } from "@/components/StatBars";
 import { TypeBadge } from "@/components/TypeBadge";
+import { groupLabel } from "@/lib/calculator";
 import { offenseVsProfile, recommendCounters } from "@/lib/counters";
 import {
   getAbilityModifiers,
@@ -16,10 +22,13 @@ import {
   getPokemon,
   hasEvolution,
   sameTypeCombo,
+  toSummary,
 } from "@/lib/data";
 import { abilityChanges, guaranteedProfile } from "@/lib/matchups";
+import type { Pokemon } from "@/lib/model";
 import { pokemonDescription, pokemonFaq } from "@/lib/pokemon-page";
 import { pageMetadata } from "@/lib/seo";
+import { TYPE_COLORS } from "@/lib/type-colors";
 import { formatMultiplier, groupByMultiplier, typeLabel } from "@/lib/typechart";
 
 type Props = { params: Promise<{ slug: string }> };
@@ -41,7 +50,32 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   });
 }
 
-const h2 = "text-xl font-semibold";
+/** Previous/next in Pokédex order, like the arrows on pokemon.com's Pokédex pages. */
+function neighbors(p: Pokemon): [Pokemon | undefined, Pokemon | undefined] {
+  const all = getAllPokemon();
+  const i = all.findIndex((x) => x.slug === p.slug);
+  return [all[i - 1], all[i + 1]];
+}
+
+const SLIDE = { "nav-forward": "nav-forward", "nav-back": "nav-back", default: "none" };
+
+function DexArrow({ to, dir }: { to: Pokemon | undefined; dir: "prev" | "next" }) {
+  if (!to) return <span />;
+  return (
+    <Link
+      href={`/pokemon/${to.slug}`}
+      transitionTypes={[dir === "next" ? "nav-forward" : "nav-back"]}
+      rel={dir}
+      className={`group flex min-w-0 items-center gap-2 rounded-full bg-black/15 px-3 py-1.5 text-sm font-bold transition-colors duration-(--duration-fast) hover:bg-black/25 ${dir === "next" ? "flex-row-reverse" : ""}`}
+    >
+      <span aria-hidden="true" className="transition-transform duration-(--duration-fast) group-hover:scale-125">
+        {dir === "next" ? "→" : "←"}
+      </span>
+      <span className="hidden tabular-nums opacity-70 sm:inline">{dexNo(to.dex)}</span>
+      <span className="max-w-36 truncate">{to.name}</span>
+    </Link>
+  );
+}
 
 export default async function PokemonPage({ params }: Props) {
   const { slug } = await params;
@@ -55,113 +89,173 @@ export default async function PokemonPage({ params }: Props) {
   const counters = recommendCounters(p, getAllPokemon(), 6, modifiers);
   const stages = getEvolutionStages(p);
   const same = sameTypeCombo(p).slice(0, 12);
+  const [prev, next] = neighbors(p);
+  const main = TYPE_COLORS[p.types[0]];
+  // Dual types show the second type behind the artwork; single types get a light disk on their own color.
+  const disk = p.types[1]
+    ? `radial-gradient(circle at 50% 40%, ${TYPE_COLORS[p.types[1]].bg}, color-mix(in srgb, ${TYPE_COLORS[p.types[1]].bg} 55%, black))`
+    : "radial-gradient(circle at 50% 40%, rgb(255 255 255 / 0.5), rgb(255 255 255 / 0.12))";
+  const weak = groups.filter((g) => g.multiplier > 1);
 
   return (
-    <article>
-      <Breadcrumbs items={[{ name: "Pokémon", path: "/pokemon" }, { name: p.name, path: `/pokemon/${p.slug}` }]} />
-      <header className="flex items-center gap-4">
-        <Sprite src={p.sprite} name={p.name} type={p.types[0]} eager />
-        <div>
-          <p className="text-sm text-zinc-500">#{String(p.dex).padStart(4, "0")}</p>
-          <h1 className="text-2xl font-bold sm:text-3xl">{p.name} Weakness &amp; Counters</h1>
-          <div className="mt-2 flex gap-1">{p.types.map((t) => <TypeBadge key={t} type={t} />)}</div>
-        </div>
-      </header>
-
-      <section className="mt-6">
-        <h2 className={h2}>Type matchups</h2>
-        <table className="mt-2 w-full text-sm">
-          <thead>
-            <tr className="text-left">
-              <th className="w-20 py-2">Damage</th>
-              <th className="py-2">Attacking types</th>
-            </tr>
-          </thead>
-          <tbody>
-            {groups.map((g) => (
-              <tr key={g.multiplier} className="border-t border-zinc-200 dark:border-zinc-800">
-                <td className="py-2 font-semibold">{formatMultiplier(g.multiplier)}</td>
-                <td className="py-2">
-                  <div className="flex flex-wrap gap-1">{g.types.map((t) => <TypeBadge key={t} type={t} />)}</div>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-        {changes.length > 0 && (
-          <ul className="mt-3 space-y-1 text-sm">
-            {changes.map(({ ability, changes: c, always }) => (
-              <li key={ability.slug}>
-                <strong>{always ? `${getAbilityName(ability.slug)} (always, already counted above):` : `With ${getAbilityName(ability.slug)}:`}</strong>{" "}
-                {c.map((x) => `${typeLabel(x.type)} ${formatMultiplier(x.from)} → ${formatMultiplier(x.to)}`).join(", ")}
-                {ability.note ? ` (${ability.note})` : ""}
-              </li>
-            ))}
-          </ul>
-        )}
-      </section>
-
-      <AdSlot id="pokemon-1" />
-
-      <section className="mt-8">
-        <h2 className={h2}>Base stats</h2>
-        <StatBars stats={p.stats} />
-      </section>
-
-      {hasEvolution(p) && (
-        <section className="mt-8">
-          <h2 className={h2}>Evolution</h2>
-          <ol className="mt-2 flex flex-wrap items-center gap-3">
-            {stages.map((stage, i) => (
-              <li key={i} className="flex items-center gap-3">
-                {i > 0 && <span aria-hidden="true">→</span>}
-                <div className="flex flex-col gap-1">
-                  {stage.map((e) => (
-                    <Link key={e.slug} href={`/pokemon/${e.slug}`} className="flex items-center gap-1 hover:underline">
-                      <Sprite src={e.sprite} name={e.name} type={e.types[0]} size={48} />
-                      <span className={e.slug === p.slug || e.slug === p.speciesSlug ? "font-semibold" : ""}>{e.name}</span>
-                    </Link>
-                  ))}
+    <ViewTransition enter={SLIDE} exit={SLIDE} default="none">
+      <article>
+        <section style={{ backgroundColor: main.bg, color: main.fg }} className="relative overflow-hidden">
+          <span
+            aria-hidden="true"
+            className="pointer-events-none absolute -bottom-10 right-0 select-none text-[11rem] font-extrabold leading-none tracking-tighter opacity-10 sm:text-[16rem]"
+          >
+            {String(p.dex).padStart(4, "0")}
+          </span>
+          <Wrap className="relative py-8 sm:py-12">
+            <div className="mb-6 flex items-center justify-between gap-2">
+              <DexArrow to={prev} dir="prev" />
+              <DexArrow to={next} dir="next" />
+            </div>
+            <div className="grid items-center gap-6 md:grid-cols-[1fr_auto]">
+              <div>
+                <Breadcrumbs items={[{ name: "Pokémon", path: "/pokemon" }, { name: p.name, path: `/pokemon/${p.slug}` }]} />
+                <p className="text-lg font-extrabold tabular-nums opacity-70">{dexNo(p.dex)}</p>
+                <h1 className="text-4xl font-extrabold leading-[0.95] sm:text-6xl">{p.name} Weakness &amp; Counters</h1>
+                <div className="mt-4 flex gap-2">
+                  {p.types.map((t) => <TypeBadge key={t} type={t} size="md" className="ring-2 ring-white/70" />)}
                 </div>
-              </li>
-            ))}
-          </ol>
+                {weak.length > 0 && (
+                  <div className="mt-6 inline-flex flex-wrap items-center gap-2 rounded-[10px] bg-paper p-3 text-ink">
+                    <span className="mr-1 text-sm font-extrabold uppercase tracking-wider">Weak to</span>
+                    {weak.flatMap((g) =>
+                      g.types.map((t) => (
+                        <span key={t} className="inline-flex items-center gap-1">
+                          <TypeBadge type={t} />
+                          <span className="text-sm font-extrabold tabular-nums">{formatMultiplier(g.multiplier)}</span>
+                        </span>
+                      )),
+                    )}
+                  </div>
+                )}
+              </div>
+              <div className="bob justify-self-center">
+                <HoloCard className="rounded-full">
+                  <div
+                    className="flex size-64 items-center justify-center rounded-full sm:size-80"
+                    style={{ background: disk }}
+                  >
+                    <Sprite src={p.sprite} name={p.name} type={p.types[0]} size={280} eager morph={`art-${p.slug}`} className="max-sm:size-56!" />
+                  </div>
+                </HoloCard>
+              </div>
+            </div>
+          </Wrap>
         </section>
-      )}
 
-      {counters.length > 0 && (
-        <section className="mt-8">
-          <h2 className={h2}>Best counters to {p.name}</h2>
-          <ul className="mt-2 grid grid-cols-2 gap-3 sm:grid-cols-3">
-            {counters.map((c) => (
-              <li key={c.slug}>
-                <Link href={`/pokemon/${c.slug}`} className="flex items-center gap-2 rounded-lg border border-zinc-200 p-2 hover:bg-zinc-50 dark:border-zinc-800 dark:hover:bg-zinc-900">
-                  <Sprite src={c.sprite} name={c.name} type={c.types[0]} size={56} />
-                  <span>
-                    <span className="block font-medium">{c.name}</span>
-                    <span className="text-xs text-zinc-500">Hits for {formatMultiplier(offenseVsProfile(c, profile))}</span>
-                  </span>
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </section>
-      )}
+        <Wrap className="mt-12 grid gap-12 lg:grid-cols-[1.1fr_1fr]">
+          <section>
+            <H2>Type matchups</H2>
+            <p className="mb-5 mt-1 text-muted">Damage {p.name} takes from each attacking type.</p>
+            <MatchupRows groups={groups} label={(m) => groupLabel("defense", m)} />
+            {changes.length > 0 && (
+              <ul className="mt-6 space-y-2">
+                {changes.map(({ ability, changes: c, always }) => (
+                  <li key={ability.slug} className="rounded-[10px] bg-panel p-4 text-sm">
+                    <strong className="font-extrabold">
+                      {always ? `${getAbilityName(ability.slug)} (always, already counted above):` : `With ${getAbilityName(ability.slug)}:`}
+                    </strong>{" "}
+                    {c.map((x) => `${typeLabel(x.type)} ${formatMultiplier(x.from)} → ${formatMultiplier(x.to)}`).join(", ")}
+                    {ability.note ? ` (${ability.note})` : ""}
+                  </li>
+                ))}
+              </ul>
+            )}
+          </section>
+          <section>
+            <H2>Base stats</H2>
+            <StatBars stats={p.stats} />
+          </section>
+        </Wrap>
 
-      {same.length > 0 && (
-        <section className="mt-8">
-          <h2 className={h2}>Other {p.types.map(typeLabel).join("/")} Pokémon</h2>
-          <ul className="mt-2 flex flex-wrap gap-x-4 gap-y-1">
-            {same.map((o) => (
-              <li key={o.slug}>
-                <Link href={`/pokemon/${o.slug}`} className="underline">{o.name}</Link>
-              </li>
-            ))}
-          </ul>
-        </section>
-      )}
+        <Wrap>
+          <AdSlot id="pokemon-1" />
+        </Wrap>
 
-      <Faq items={pokemonFaq(p, counters)} />
-    </article>
+        {hasEvolution(p) && (
+          <Wrap className="mt-14">
+            <section>
+              <H2>Evolution</H2>
+              <ol className="mt-5 flex flex-col items-start gap-2 sm:flex-row sm:flex-wrap sm:items-center sm:gap-3">
+                {stages.map((stage, i) => (
+                  <li key={i} className="flex flex-col items-start gap-2 sm:flex-row sm:items-center sm:gap-3">
+                    {i > 0 && (
+                      <span aria-hidden="true" className="pl-6 text-2xl font-extrabold text-muted sm:pl-0">
+                        <span className="sm:hidden">↓</span>
+                        <span className="hidden sm:inline">→</span>
+                      </span>
+                    )}
+                    <div className="flex flex-col gap-2">
+                      {stage.map((e) => {
+                        const current = e.slug === p.slug || e.slug === p.speciesSlug;
+                        return (
+                          <Link
+                            key={e.slug}
+                            href={`/pokemon/${e.slug}`}
+                            aria-current={current ? "page" : undefined}
+                            className={`flex items-center gap-2 rounded-[10px] py-1 pl-1 pr-4 transition-colors duration-(--duration-fast) ${current ? "bg-ink text-paper" : "bg-panel hover:bg-line"}`}
+                          >
+                            <Sprite src={e.sprite} name={e.name} type={e.types[0]} size={56} />
+                            <span className="font-extrabold">{e.name}</span>
+                          </Link>
+                        );
+                      })}
+                    </div>
+                  </li>
+                ))}
+              </ol>
+            </section>
+          </Wrap>
+        )}
+
+        {counters.length > 0 && (
+          <Wrap className="mt-14">
+            <section>
+              <H2>Best counters to {p.name}</H2>
+              <ul className="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
+                {counters.map((c) => (
+                  <li key={c.slug}>
+                    <PokemonCard
+                      p={toSummary(c)}
+                      size={96}
+                      footer={
+                        <span className="flex items-center gap-2">
+                          <span className="text-muted">Hits for</span>
+                          <MultiplierChip m={offenseVsProfile(c, profile)} className="min-w-0 py-0.5 text-sm" />
+                        </span>
+                      }
+                    />
+                  </li>
+                ))}
+              </ul>
+            </section>
+          </Wrap>
+        )}
+
+        {same.length > 0 && (
+          <Wrap className="mt-14">
+            <section>
+              <H2>Other {p.types.map(typeLabel).join("/")} Pokémon</H2>
+              <ul className="mt-4 flex flex-wrap gap-2">
+                {same.map((o) => (
+                  <li key={o.slug}>
+                    <Link href={`/pokemon/${o.slug}`} className="block rounded-full bg-panel px-3 py-1.5 text-sm font-bold hover:bg-line">
+                      {o.name}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          </Wrap>
+        )}
+
+        <Faq items={pokemonFaq(p, counters)} />
+      </article>
+    </ViewTransition>
   );
 }

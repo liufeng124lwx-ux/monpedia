@@ -9,9 +9,9 @@ export const metadata = pageMetadata({
 
 export default function Terms() {
   return (
-    <article className="max-w-2xl space-y-4">
+    <article className="mx-auto max-w-2xl space-y-4 px-4 py-10 leading-relaxed">
       <Breadcrumbs items={[{ name: "Terms", path: "/terms" }]} />
-      <h1 className="text-2xl font-bold">Terms of Use</h1>
+      <h1 className="text-4xl font-extrabold">Terms of Use</h1>
       <p>Last updated: October 15, 2026.</p>
       <p>
         Monpedia is provided free of charge and as is. We try to keep the data accurate but make no guarantee

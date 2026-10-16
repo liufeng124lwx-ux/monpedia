@@ -9,9 +9,9 @@ export const metadata = pageMetadata({
 
 export default function Privacy() {
   return (
-    <article className="max-w-2xl space-y-4">
+    <article className="mx-auto max-w-2xl space-y-4 px-4 py-10 leading-relaxed">
       <Breadcrumbs items={[{ name: "Privacy", path: "/privacy" }]} />
-      <h1 className="text-2xl font-bold">Privacy Policy</h1>
+      <h1 className="text-4xl font-extrabold">Privacy Policy</h1>
       <p>Last updated: October 15, 2026.</p>
       <p>Monpedia has no user accounts and does not ask you for personal information.</p>
       <p>

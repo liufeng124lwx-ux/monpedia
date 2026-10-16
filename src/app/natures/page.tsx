@@ -2,6 +2,7 @@ import { AdSlot } from "@/components/AdSlot";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { Faq } from "@/components/Faq";
 import { NatureTable } from "@/components/NatureTable";
+import { Band, Eyebrow, Wrap } from "@/components/Page";
 import { getNatures } from "@/lib/data";
 import { pageMetadata } from "@/lib/seo";
 
@@ -30,13 +31,18 @@ const FAQ = [
 export default function NaturesPage() {
   return (
     <>
-      <Breadcrumbs items={[{ name: "Natures", path: "/natures" }]} />
-      <h1 className="text-2xl font-bold sm:text-3xl">Pokémon Nature Chart</h1>
-      <p className="mt-2 text-zinc-600 dark:text-zinc-400">
-        Every nature and the stat it raises and lowers. Use the filters to find natures for a specific stat.
-      </p>
-      <NatureTable natures={getNatures()} />
-      <AdSlot id="natures-1" />
+      <Band tone="yellow">
+        <Breadcrumbs items={[{ name: "Natures", path: "/natures" }]} />
+        <Eyebrow>25 natures · ±10%</Eyebrow>
+        <h1 className="text-4xl font-extrabold leading-[0.95] sm:text-6xl">Pokémon Nature Chart</h1>
+        <p className="mt-4 max-w-2xl text-lg font-medium">
+          Every nature and the stat it raises and lowers. Use the filters to find natures for a specific stat.
+        </p>
+      </Band>
+      <Wrap>
+        <NatureTable natures={getNatures()} />
+        <AdSlot id="natures-1" />
+      </Wrap>
       <Faq items={FAQ} />
     </>
   );

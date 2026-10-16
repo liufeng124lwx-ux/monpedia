@@ -1,4 +1,5 @@
 import { Breadcrumbs } from "@/components/Breadcrumbs";
+import { Band, Eyebrow, Wrap } from "@/components/Page";
 import { PokemonBrowser } from "@/components/PokemonBrowser";
 import { getAllPokemon, toSummary } from "@/lib/data";
 import { pageMetadata } from "@/lib/seo";
@@ -11,14 +12,20 @@ export const metadata = pageMetadata({
 });
 
 export default function PokemonIndex() {
+  const all = getAllPokemon();
   return (
     <>
-      <Breadcrumbs items={[{ name: "Pokémon", path: "/pokemon" }]} />
-      <h1 className="text-2xl font-bold sm:text-3xl">Pokémon Weakness List</h1>
-      <p className="mt-2 text-zinc-600 dark:text-zinc-400">
-        Find any Pokémon to see what it is weak to, what it resists and which Pokémon counter it.
-      </p>
-      <PokemonBrowser all={getAllPokemon().map(toSummary)} />
+      <Band tone="yellow">
+        <Breadcrumbs items={[{ name: "Pokémon", path: "/pokemon" }]} />
+        <Eyebrow>{all.length} Pokémon · Megas &amp; regional forms included</Eyebrow>
+        <h1 className="text-4xl font-extrabold leading-[0.95] sm:text-6xl">Pokémon Weakness List</h1>
+        <p className="mt-4 max-w-2xl text-lg font-medium">
+          Find any Pokémon to see what it is weak to, what it resists and which Pokémon counter it.
+        </p>
+      </Band>
+      <Wrap className="mt-8">
+        <PokemonBrowser all={all.map(toSummary)} />
+      </Wrap>
     </>
   );
 }

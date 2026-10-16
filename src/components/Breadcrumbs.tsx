@@ -8,14 +8,14 @@ export function Breadcrumbs({ items }: { items: Crumb[] }) {
     <>
       <JsonLd data={breadcrumbJsonLd(all)} />
       {items.length > 0 && (
-        <nav aria-label="Breadcrumb" className="mb-4 text-sm text-zinc-500 dark:text-zinc-400">
+        <nav aria-label="Breadcrumb" className="mb-5 text-sm font-semibold opacity-70">
           <ol className="flex flex-wrap gap-1">
             {all.map((it, i) => (
               <li key={it.path}>
                 {i < all.length - 1 ? (
                   <>
                     <Link href={it.path} className="hover:underline">{it.name}</Link>
-                    <span aria-hidden="true"> › </span>
+                    <span aria-hidden="true" className="mx-1.5">/</span>
                   </>
                 ) : (
                   <span aria-current="page">{it.name}</span>
