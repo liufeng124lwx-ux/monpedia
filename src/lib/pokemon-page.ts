@@ -1,7 +1,7 @@
 import { getAbilityModifiers } from "./data";
 import { guaranteedMatchups } from "./matchups";
 import type { Pokemon } from "./model";
-import type { Qa } from "./seo";
+import { fitDescription, type Qa } from "./seo";
 import { joinList } from "./text";
 import { formatMultiplier, typeLabel, type MatchupGroup } from "./typechart";
 
@@ -29,11 +29,17 @@ const article = (word: string) => (/^[aeiou]/i.test(word) ? "an" : "a");
 export function pokemonDescription(p: Pokemon): string {
   const { weak, resist, immune } = weaknessSummary(p);
   const types = typeString(p);
-  let s = `${p.name} is ${article(types)} ${types}-type Pokémon. `;
-  s += weak.length ? `It is weak to ${joinList(weak)}` : "It has no weaknesses";
-  if (resist.length) s += `, resists ${joinList(resist)}`;
-  if (immune.length) s += ` and is immune to ${joinList(immune)}`;
-  return `${s}. See its best counters, base stats and evolutions.`;
+  const head = `${p.name} is ${article(types)} ${types}-type Pokémon. ${weak.length ? `It is weak to ${joinList(weak)}` : "It has no weaknesses"}`;
+  const res = resist.length ? `, resists ${joinList(resist)}` : "";
+  const imm = immune.length ? ` and is immune to ${joinList(immune)}` : "";
+  // Longest first; drop the resist list, then the tail, until it fits a search snippet.
+  return fitDescription([
+    `${head}${res}${imm}. See its best counters, base stats and evolutions.`,
+    `${head}${res}${imm}. See its best counters.`,
+    `${head}${imm}. See its best counters, base stats and evolutions.`,
+    `${head}${imm}. See its best counters.`,
+    `${head}${imm}.`,
+  ]);
 }
 
 export function pokemonFaq(p: Pokemon, counters: Pokemon[]): Qa[] {

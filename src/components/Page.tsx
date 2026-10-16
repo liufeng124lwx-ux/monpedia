@@ -39,3 +39,7 @@ export function Eyebrow({ children }: { children: ReactNode }) {
 export function H2({ children, id }: { children: ReactNode; id?: string }) {
   return <h2 id={id} className="text-2xl font-extrabold sm:text-3xl">{children}</h2>;
 }
+
+export function H3({ children }: { children: ReactNode }) {
+  return <h3 className="pt-3 text-xl font-extrabold">{children}</h3>;
+}

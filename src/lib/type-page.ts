@@ -1,5 +1,5 @@
 import { TYPE_NAMES, type TypeName } from "./model";
-import type { Qa } from "./seo";
+import { fitDescription, type Qa } from "./seo";
 import { joinList } from "./text";
 import { defenseProfile, offenseProfile, typeLabel, type Profile } from "./typechart";
 
@@ -26,6 +26,21 @@ export function typeDescription(t: TypeName): string {
   if (l.resists.length) s += ` and resists ${joinList(l.resists)}`;
   s += `. ${name} moves are super effective against ${l.strongAgainst.length ? joinList(l.strongAgainst) : "no types"}.`;
   return `${s} See every ${name}-type Pokémon and its matchups.`;
+}
+
+/** Meta description variant of typeDescription that fits a search snippet. */
+export function typeMetaDescription(t: TypeName): string {
+  const l = typeMatchupLists(t);
+  const name = typeLabel(t);
+  const weak = `${name} type is weak to ${joinList(l.weakTo)}`;
+  const res = l.resists.length ? ` and resists ${joinList(l.resists)}` : "";
+  const strong = ` ${name} moves are super effective against ${l.strongAgainst.length ? joinList(l.strongAgainst) : "no types"}.`;
+  return fitDescription([
+    typeDescription(t),
+    `${weak}${res}.${strong}`,
+    `${weak}.${strong} See every ${name}-type Pokémon.`,
+    `${weak}.${strong}`,
+  ]);
 }
 
 export function typeFaq(t: TypeName): Qa[] {

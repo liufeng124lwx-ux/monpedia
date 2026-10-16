@@ -17,7 +17,7 @@ const OFFICIAL = "https://windswaves.pokemon.com/en-us/";
 
 export const metadata = pageMetadata({
   title: "Pokémon Winds and Waves Starters, Release Date & Confirmed Info",
-  description: `The Pokémon Winds and Waves starters are ${starterNames}. See their types and weaknesses, the release window and every officially confirmed detail with sources.`,
+  description: `The Pokémon Winds and Waves starters are ${starterNames}. See their types, weaknesses, release window and every officially confirmed detail.`,
   path: "/winds-waves",
 });
 

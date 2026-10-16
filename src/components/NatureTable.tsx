@@ -36,7 +36,8 @@ export function NatureTable({ natures }: { natures: Nature[] }) {
 
   return (
     <div className="my-8 space-y-10">
-      <section aria-label="Nature grid">
+      <section aria-labelledby="nature-grid">
+        <h2 id="nature-grid" className="mb-4 text-2xl font-extrabold sm:text-3xl">Nature chart: raised vs lowered stat</h2>
         <div className="-mx-4 overflow-x-auto px-4">
           <table className="w-full min-w-[34rem] border-separate border-spacing-1 text-sm">
             <thead>
@@ -89,7 +90,8 @@ export function NatureTable({ natures }: { natures: Nature[] }) {
         <p className="mt-3 text-sm text-muted">Tap a nature to filter the list. Natures on the diagonal are neutral.</p>
       </section>
 
-      <section aria-label="Nature list">
+      <section aria-labelledby="nature-list">
+        <h2 id="nature-list" className="mb-4 text-2xl font-extrabold sm:text-3xl">All 25 Pokémon natures</h2>
         <div className="space-y-2">
           <StatPills label="Raises" value={up} onChange={setUp} />
           <StatPills label="Lowers" value={down} onChange={setDown} />

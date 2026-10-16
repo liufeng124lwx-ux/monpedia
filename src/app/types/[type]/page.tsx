@@ -12,7 +12,7 @@ import { pokemonOfType, toSummary } from "@/lib/data";
 import { isTypeName, TYPE_NAMES } from "@/lib/model";
 import { pageMetadata } from "@/lib/seo";
 import { TYPE_COLORS } from "@/lib/type-colors";
-import { typeDescription, typeFaq } from "@/lib/type-page";
+import { typeDescription, typeFaq, typeMetaDescription } from "@/lib/type-page";
 import { defenseProfile, groupByMultiplier, offenseProfile, typeLabel } from "@/lib/typechart";
 
 type Props = { params: Promise<{ type: string }> };
@@ -28,7 +28,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!isTypeName(type)) return {};
   return pageMetadata({
     title: `${typeLabel(type)} Type Weakness & Strengths`,
-    description: typeDescription(type),
+    description: typeMetaDescription(type),
     path: `/types/${type}`,
   });
 }

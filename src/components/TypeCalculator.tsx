@@ -95,9 +95,9 @@ export function TypeCalculator() {
       </div>
       {/* The live region stays mounted; only its children are re-keyed to replay the pop-in. */}
       <div className="lg:border-l lg:border-line lg:pl-10" aria-live="polite">
-        <p key={stateKey} className="pop mb-5 text-2xl font-extrabold leading-tight sm:text-3xl">
+        <h2 key={stateKey} className="pop mb-5 text-2xl font-extrabold leading-tight sm:text-3xl">
           {summary(state, groups)}
-        </p>
+        </h2>
         <div data-testid="calc-results" key={`r-${stateKey}`}>
           <MatchupRows groups={groups} label={(m) => groupLabel(state.mode, m)} animate />
         </div>

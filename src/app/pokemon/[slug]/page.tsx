@@ -24,8 +24,10 @@ import {
   sameTypeCombo,
   toSummary,
 } from "@/lib/data";
+import { artworkUrl } from "@/lib/art";
 import { abilityChanges, guaranteedProfile } from "@/lib/matchups";
 import type { Pokemon } from "@/lib/model";
+import { abilitySummary, evolutionSummary, howToBeat, roleSummary, typingSummary } from "@/lib/pokemon-insights";
 import { pokemonDescription, pokemonFaq } from "@/lib/pokemon-page";
 import { pageMetadata } from "@/lib/seo";
 import { TYPE_COLORS } from "@/lib/type-colors";
@@ -47,6 +49,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: `${p.name} Weakness & Counters – Type Matchups`,
     description: pokemonDescription(p),
     path: `/pokemon/${p.slug}`,
+    image: { url: artworkUrl(p.sprite), width: 475, height: 475, alt: `${p.name} official artwork` },
   });
 }
 
@@ -153,6 +156,7 @@ export default async function PokemonPage({ params }: Props) {
             <H2>Type matchups</H2>
             <p className="mb-5 mt-1 text-muted">Damage {p.name} takes from each attacking type.</p>
             <MatchupRows groups={groups} label={(m) => groupLabel("defense", m)} />
+            <p className="mt-5 leading-relaxed">{typingSummary(p, profile)}</p>
             {changes.length > 0 && (
               <ul className="mt-6 space-y-2">
                 {changes.map(({ ability, changes: c, always }) => (
@@ -170,6 +174,8 @@ export default async function PokemonPage({ params }: Props) {
           <section>
             <H2>Base stats</H2>
             <StatBars stats={p.stats} />
+            <p className="mt-5 leading-relaxed">{roleSummary(p)}</p>
+            {abilitySummary(p) && <p className="mt-3 leading-relaxed">{abilitySummary(p)}</p>}
           </section>
         </Wrap>
 
@@ -177,11 +183,25 @@ export default async function PokemonPage({ params }: Props) {
           <AdSlot id="pokemon-1" />
         </Wrap>
 
+        <Wrap className="mt-14">
+          <section>
+            <H2>How to beat {p.name}</H2>
+            <div className="mt-4 max-w-3xl space-y-3 text-lg leading-relaxed">
+              {howToBeat(p, profile, counters).map((t) => <p key={t}>{t}</p>)}
+            </div>
+          </section>
+        </Wrap>
+
+        <Wrap className="mt-14">
+          <section>
+            <H2>Evolution</H2>
+            <p className="mt-2 max-w-3xl leading-relaxed text-muted">{evolutionSummary(p)}</p>
+          </section>
+        </Wrap>
         {hasEvolution(p) && (
-          <Wrap className="mt-14">
-            <section>
-              <H2>Evolution</H2>
-              <ol className="mt-5 flex flex-col items-start gap-2 sm:flex-row sm:flex-wrap sm:items-center sm:gap-3">
+          <Wrap className="mt-5">
+            <section aria-label={`${p.name} evolution chain`}>
+              <ol className="flex flex-col items-start gap-2 sm:flex-row sm:flex-wrap sm:items-center sm:gap-3">
                 {stages.map((stage, i) => (
                   <li key={i} className="flex flex-col items-start gap-2 sm:flex-row sm:items-center sm:gap-3">
                     {i > 0 && (

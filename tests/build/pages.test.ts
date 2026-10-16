@@ -22,6 +22,8 @@ const pages = htmlFiles(OUT).map((f) => {
     title: root.querySelector("title")?.text.trim() ?? "",
     h1: root.querySelectorAll("h1").length,
     canonical: root.querySelector('link[rel="canonical"]')?.getAttribute("href") ?? "",
+    description: root.querySelector('meta[name="description"]')?.getAttribute("content") ?? "",
+    ogImage: root.querySelector('meta[property="og:image"]')?.getAttribute("content") ?? "",
     jsonLd: root.querySelectorAll('script[type="application/ld+json"]').map((s) => JSON.parse(s.text)),
   };
 });
@@ -41,6 +43,14 @@ describe("built site", () => {
       expect(p.h1, p.file).toBe(1);
       expect(p.canonical, p.file).toMatch(/^https:\/\/monpedia\.net(\/[^?#]*[^/])?$/);
       expect(p.jsonLd.some((j) => j["@type"] === "BreadcrumbList"), p.file).toBe(true);
+    }
+  });
+
+  it("every page has a snippet-length description and a share image", () => {
+    for (const p of pages) {
+      expect(p.description.length, p.file).toBeGreaterThan(50);
+      expect(p.description.length, `${p.file}: ${p.description}`).toBeLessThanOrEqual(160);
+      expect(p.ogImage, p.file).toMatch(/^https:\/\//);
     }
   });
 
