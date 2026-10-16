@@ -8,7 +8,8 @@ const OUT = path.resolve(__dirname, "../../out");
 function htmlFiles(dir: string): string[] {
   return readdirSync(dir).flatMap((name) => {
     const full = path.join(dir, name);
-    if (statSync(full).isDirectory()) return name.startsWith("_") ? [] : htmlFiles(full);
+    // _next is framework output; ads/ holds the noindexed Adsterra frame pages, not site pages.
+    if (statSync(full).isDirectory()) return name.startsWith("_") || name === "ads" ? [] : htmlFiles(full);
     return name.endsWith(".html") && !name.startsWith("_") && name !== "404.html" ? [full] : [];
   });
 }

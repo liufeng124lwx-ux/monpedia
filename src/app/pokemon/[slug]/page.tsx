@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ViewTransition } from "react";
-import { AdSlot } from "@/components/AdSlot";
+import { AdSlot, NativeAdSlot } from "@/components/AdSlot";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { Faq } from "@/components/Faq";
 import { HoloCard } from "@/components/HoloCard";
@@ -273,6 +273,10 @@ export default async function PokemonPage({ params }: Props) {
             </section>
           </Wrap>
         )}
+
+        <Wrap>
+          <NativeAdSlot id="pokemon-native" />
+        </Wrap>
 
         <Faq items={pokemonFaq(p, counters)} />
       </article>
