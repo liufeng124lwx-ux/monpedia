@@ -30,7 +30,7 @@ export function NativeAdFrame({ id }: { id: string }) {
     <iframe
       ref={frame}
       data-ad-slot={id}
-      src="/ads/native.html"
+      src="/ads/native"
       title="Advertisement"
       loading="lazy"
       scrolling="no"

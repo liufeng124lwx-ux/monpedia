@@ -21,7 +21,7 @@ export function AdSlot({ id }: { id: string }) {
     <Labelled>
       <iframe
         data-ad-slot={id}
-        src="/ads/banner.html"
+        src="/ads/banner"
         title="Advertisement"
         width={unit.width}
         height={unit.height}
